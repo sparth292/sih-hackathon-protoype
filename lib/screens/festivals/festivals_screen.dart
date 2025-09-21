@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_india_hackathon/screens/festivals/details_screen.dart';
 import '../home/home_screen.dart';
 import '../store/store_screen.dart';
 import '../communities/communities_screen.dart';
@@ -173,19 +174,30 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
   }
 
   Widget _buildPandalCard(Map<String, dynamic> pandal) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => FestivalDetailsScreen(
+              festivalDetails: pandal,
+            ),
           ),
-        ],
-      ),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -255,6 +267,7 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
             ),
           ),
         ],
+      ),
       ),
     );
   }
