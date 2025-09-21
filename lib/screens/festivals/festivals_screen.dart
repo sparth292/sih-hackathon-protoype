@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_india_hackathon/screens/home/home_screen.dart';
-import '../../theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../home/home_screen.dart';
+import '../store/store_screen.dart';
+import '../communities/communities_screen.dart';
 
 class FestivalsScreen extends StatefulWidget {
   const FestivalsScreen({Key? key}) : super(key: key);
@@ -43,51 +45,67 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFF8F7F5),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppTheme.textPrimary),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Color(0xFF333333),
+            size: 20,
+          ),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'Ganpati Pandals',
-          style: AppTheme.heading1,
+          style: GoogleFonts.playfairDisplay(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFFD2691E),
+          ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Search Bar
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 1,
-                    blurRadius: 4,
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 10,
                     offset: const Offset(0, 2),
                   ),
                 ],
               ),
               child: Row(
-                children: const [
-                  Icon(Icons.search, color: AppTheme.grey),
-                  SizedBox(width: 8),
+                children: [
+                  Icon(
+                    Icons.search,
+                    color: const Color(0xFF666666),
+                    size: 20,
+                  ),
+                  const SizedBox(width: 12),
                   Text(
                     'Search for pandals',
-                    style: TextStyle(color: AppTheme.grey, fontSize: 16),
+                    style: GoogleFonts.poppins(
+                      color: const Color(0xFF666666),
+                      fontSize: 16,
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
             
             // Categories
             SizedBox(
@@ -97,29 +115,37 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
                 itemCount: categories.length,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: ElevatedButton(
-                      onPressed: () {
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: GestureDetector(
+                      onTap: () {
                         setState(() {
                           _selectedCategory = index;
                         });
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _selectedCategory == index
-                            ? AppTheme.primaryColor
-                            : Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        elevation: 0,
-                      ),
-                      child: Text(
-                        categories[index],
-                        style: TextStyle(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                        decoration: BoxDecoration(
                           color: _selectedCategory == index
-                              ? Colors.white
-                              : AppTheme.primaryColor,
-                          fontWeight: FontWeight.w500,
+                              ? const Color(0xFFFF9B00)
+                              : Colors.white,
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 5,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          categories[index],
+                          style: GoogleFonts.poppins(
+                            color: _selectedCategory == index
+                                ? Colors.white
+                                : const Color(0xFF333333),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
                     ),
@@ -127,7 +153,7 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
                 },
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
             
             // Pandal List
             ListView.builder(
@@ -150,13 +176,12 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       decoration: BoxDecoration(
-        color: AppTheme.cardColor,
-        borderRadius: BorderRadius.circular(15),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 1,
-            blurRadius: 5,
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
             offset: const Offset(0, 2),
           ),
         ],
@@ -168,13 +193,16 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
           Container(
             width: 100,
             height: 100,
-            margin: const EdgeInsets.all(12),
+            margin: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              color: Colors.grey[200],
-              image: const DecorationImage(
-                image: AssetImage('assets/images/placeholder.jpg'),
+              borderRadius: BorderRadius.circular(12),
+              color: const Color(0xFFF0F0F0),
+              image: DecorationImage(
+                image: AssetImage(pandal['image']),
                 fit: BoxFit.cover,
+                onError: (exception, stackTrace) {
+                  // Fallback to placeholder if image doesn't exist
+                },
               ),
             ),
           ),
@@ -182,33 +210,42 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
           // Pandal Details
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    pandal['location'],
-                    style: const TextStyle(
-                      color: AppTheme.secondaryColor,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFF9B00).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      pandal['location'],
+                      style: GoogleFonts.poppins(
+                        color: const Color(0xFFFF9B00),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 8),
                   Text(
                     pandal['name'],
-                    style: const TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.textPrimary,
+                      color: const Color(0xFF333333),
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 6),
                   Text(
                     pandal['description'],
-                    style: const TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 12,
-                      color: AppTheme.textSecondary,
+                      color: const Color(0xFF666666),
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -223,56 +260,76 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
   }
 
   Widget _buildBottomNavBar() {
-    return BottomNavigationBar(
-      currentIndex: 1, // Festivals tab is selected
-      type: BottomNavigationBarType.fixed,
-      selectedItemColor: AppTheme.primaryColor,
-      unselectedItemColor: AppTheme.grey,
-      showSelectedLabels: true,
-      showUnselectedLabels: true,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home_outlined),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Stack(
-            children: [
-              Icon(Icons.festival_outlined),
-              Positioned(
-                right: 0,
-                child: CircleAvatar(
-                  backgroundColor: Colors.red,
-                  radius: 4,
-                ),
-              ),
-            ],
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, -2),
           ),
-          label: 'Festivals',
+        ],
+      ),
+      child: BottomNavigationBar(
+        currentIndex: 1, // Pandals tab is selected
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: const Color(0xFFFF9B00),
+        unselectedItemColor: const Color(0xFF666666),
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedLabelStyle: GoogleFonts.poppins(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.calendar_today_outlined),
-          label: 'Bookings',
+        unselectedLabelStyle: GoogleFonts.poppins(
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
         ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.people_outline),
-          label: 'Community',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person_outline),
-          label: 'Profile',
-        ),
-      ],
-      onTap: (index) {
-        if (index == 0) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
-            ),
-          );
-        }
-      },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 24),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.location_on, size: 24),
+            label: 'Pandals',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.store, size: 24),
+            label: 'Store',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people_outline, size: 24),
+            label: 'Communities',
+          ),
+        ],
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomeScreen(),
+              ),
+            );
+          } else if (index == 2) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const StoreScreen(),
+              ),
+            );
+          } else if (index == 3) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const CommunitiesScreen(),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 }
