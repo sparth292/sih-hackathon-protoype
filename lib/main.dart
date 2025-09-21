@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'screens/auth/login_screen.dart';
+import 'screens/splash/splash_screen.dart';
 
 void main() {
   // Ensure Flutter binding is initialized
@@ -17,22 +17,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Color scheme from the login screen
-    const Color primaryColor = Color(0xFFFF8C00); // Orange
-    const Color backgroundColor = Color(0xFFF5F5F5); // Light grey background
+    // Updated color scheme
+    const Color primaryColor = Color(0xFFFF9B00); // Orange
+    const Color backgroundColor = Color(0xFFF8F7F5); // Updated background
     const Color textColor = Color(0xFF333333); // Dark grey text
 
     return MaterialApp(
-      title: 'UtsavConnect',
+      title: 'Utsava',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // Use Playfair Display as the default font
-        fontFamily: 'PlayfairDisplay',
+        // Use Poppins as the default font
+        fontFamily: 'Poppins',
         // Color scheme
         primaryColor: primaryColor,
         scaffoldBackgroundColor: backgroundColor,
         // Text theme
-        textTheme: GoogleFonts.playfairDisplayTextTheme(
+        textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
         // App bar theme
@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const LoginScreen(),
+      home: const SplashScreen(),
     );
   }
 }
