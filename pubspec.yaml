@@ -34,6 +34,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
@@ -57,10 +58,27 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  # Fonts
+  fonts:
+    - family: PlayfairDisplay
+      fonts:
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-VariableFont_wght.ttf
+          weight: 400  # Regular weight
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-VariableFont_wght.ttf
+          weight: 500  # Medium weight
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-VariableFont_wght.ttf
+          weight: 600  # Semi-bold
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-VariableFont_wght.ttf
+          weight: 700  # Bold
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-VariableFont_wght.ttf
+          weight: 800  # Extra-bold
+        - asset: assets/fonts/playfair_display/PlayfairDisplay-VariableFont_wght.ttf
+          weight: 900  # Black
+  
+  # Assets
+  assets:
+    - assets/images/
+    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

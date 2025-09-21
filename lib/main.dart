@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:smart_india_hackathon/common_screen/login_screen.dart';
-import 'package:smart_india_hackathon/common_screen/signup_screen.dart';
-import 'package:smart_india_hackathon/user_screen/user_dashboard.dart';
-import 'package:smart_india_hackathon/user_screen/pandal_list_screen.dart';
-import 'package:smart_india_hackathon/user_screen/pandal_detail_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'screens/auth/login_screen.dart';
 
 void main() {
+  // Ensure Flutter binding is initialized
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Google Fonts
+  GoogleFonts.config.allowRuntimeFetching = true;
+  
   runApp(const MyApp());
 }
 
@@ -14,66 +17,77 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Color scheme from the login screen
+    const Color primaryColor = Color(0xFFFF8C00); // Orange
+    const Color backgroundColor = Color(0xFFF5F5F5); // Light grey background
+    const Color textColor = Color(0xFF333333); // Dark grey text
+
     return MaterialApp(
-      title: 'Mahotsav App',
+      title: 'UtsavConnect',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFFFF6B35),
-          primary: const Color(0xFFFF6B35), // Orange
-          secondary: const Color(0xFFFF9F1C), // Lighter Orange
-          background: Colors.white,
-          surface: Colors.white,
-          onPrimary: Colors.white,
-          onSecondary: Colors.black87,
+        // Use Playfair Display as the default font
+        fontFamily: 'PlayfairDisplay',
+        // Color scheme
+        primaryColor: primaryColor,
+        scaffoldBackgroundColor: backgroundColor,
+        // Text theme
+        textTheme: GoogleFonts.playfairDisplayTextTheme(
+          Theme.of(context).textTheme,
         ),
-        useMaterial3: true,
+        // App bar theme
         appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          centerTitle: true,
+          iconTheme: IconThemeData(color: textColor),
           titleTextStyle: TextStyle(
-            color: Colors.black87,
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+            color: textColor,
+            fontSize: 24,
+            fontWeight: FontWeight.w600,
           ),
-          iconTheme: IconThemeData(color: Colors.black87),
         ),
+        // Input decoration theme
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
-          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(30),
             borderSide: BorderSide.none,
           ),
-          hintStyle: TextStyle(color: Colors.grey[400]),
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFFF6B35), // Orange
-            foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-            ),
-            elevation: 2,
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 16,
+            horizontal: 20,
+          ),
+          hintStyle: const TextStyle(
+            color: Color(0xFF999999),
           ),
         ),
+        // Elevated button theme
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: primaryColor,
+            foregroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            textStyle: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        // Text button theme
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: const Color(0xFFFF6B35), // Orange
+            foregroundColor: primaryColor,
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),
-      initialRoute: '/login',
-      routes: {
-        '/login': (context) => const LoginScreen(),
-        '/signup': (context) => const SignupScreen(),
-        '/dashboard': (context) => const UserDashboard(),
-        '/pandals': (context) => const PandalListScreen(),
-        // PandalDetailScreen is pushed directly with arguments
-      },
+      home: const LoginScreen(),
     );
   }
 }
