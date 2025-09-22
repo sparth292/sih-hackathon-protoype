@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_india_hackathon/screens/auth/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:smart_india_hackathon/services/supabase_service.dart';
 import '../home/home_screen.dart';
@@ -49,7 +50,7 @@ class _SignupScreenState extends State<SignupScreen> {
         // Navigate to home screen after successful signup
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
         );
       }
     } on AuthException catch (e) {

@@ -88,21 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: IntrinsicHeight(
                     child: Column(
                       children: [
-                        // Back button
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: IconButton(
-                            onPressed: () => Navigator.pop(context),
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              color: Color(0xFF333333),
-                              size: 20,
-                            ),
-                            padding: EdgeInsets.zero,
-                            constraints: const BoxConstraints(),
-                          ),
-                        ),
-                        
+                        const SizedBox(height: 150),
                         // Main content
                         Expanded(
                           child: SingleChildScrollView(
@@ -132,19 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           color: const Color(0xFF333333),
                         ),
                       ),
-                      
-                      const SizedBox(height: 8),
-                      
-                      // Subtitle
-                      Text(
-                        'Sign in to continue your festival journey',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          color: const Color(0xFF666666),
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      
                       const SizedBox(height: 40),
                       
                       // Error Message
@@ -241,27 +214,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ],
                         ),
                       ),
-                      
-                      const SizedBox(height: 16),
-                      
-                      // Forgot Password
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Forgot password?',
-                            style: GoogleFonts.poppins(
-                              color: const Color(0xFFFF9B00),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ),
-                      
-                      const SizedBox(height: 32),
-                      
+
                       const SizedBox(height: 32),
                       
                       // Login Button
