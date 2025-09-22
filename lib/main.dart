@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'screens/splash/splash_screen.dart';
+import 'services/supabase_service.dart';
 
-void main() {
+final supabase = SupabaseService();
+
+Future<void> main() async {
   // Ensure Flutter binding is initialized
   WidgetsFlutterBinding.ensureInitialized();
   
   // Initialize Google Fonts
   GoogleFonts.config.allowRuntimeFetching = true;
   
-  runApp(const MyApp());
+  // Initialize Supabase
+  try {
+    await supabase.initialize();
+    runApp(const MyApp());
+  } catch (e) {
+    runApp(
+      MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Text('Failed to initialize app: $e'),
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {

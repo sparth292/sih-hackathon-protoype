@@ -38,6 +38,13 @@ dependencies:
   permission_handler:
   geolocator:
   flutter_osm_plugin:
+  
+  # Supabase
+  supabase_flutter: ^2.3.4
+  # For handling URL redirects for OAuth
+  app_links: ^6.1.1
+  # For secure storage of tokens
+  flutter_secure_storage: ^9.0.0
 
 dev_dependencies:
   flutter_test:
