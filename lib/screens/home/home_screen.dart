@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../festivals/festivals_screen.dart';
 import '../store/store_screen.dart';
 import '../communities/communities_screen.dart';
+import '../../widgets/chat_popup.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -65,6 +66,19 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: _buildBottomNavBar(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return const ChatPopup();
+            },
+          );
+        },
+        backgroundColor: const Color(0xFFFF9B00),
+        child: const Icon(Icons.chat, color: Colors.white, size: 28),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 

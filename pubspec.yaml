@@ -45,6 +45,7 @@ dependencies:
   app_links: ^6.1.1
   # For secure storage of tokens
   flutter_secure_storage: ^9.0.0
+  google_generative_ai:  # For Gemini AI integration
 
 dev_dependencies:
   flutter_test:
