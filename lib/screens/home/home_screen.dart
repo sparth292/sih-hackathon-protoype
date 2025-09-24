@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:smart_india_hackathon/screens/home/procession%20tracking/select_pandal_screen.dart';
 import '../festivals/festivals_screen.dart';
 import '../store/store_screen.dart';
 import '../communities/communities_screen.dart';
 import '../../widgets/chat_popup.dart';
 import '../pandal_map/pandal_map_screen.dart';
+//import 'procession tracking/select_pandal_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -99,8 +101,14 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         _buildQuickAccessCard(
           'Track Pandals',
-          '',
+          'Track Aagmans and Visarjans',
           Icons.location_on,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SelectPandalScreen()),
+            );
+          },          
         ),
         _buildQuickAccessCard(
           'Visit Store',

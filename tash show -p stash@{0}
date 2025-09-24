@@ -1,0 +1,433 @@
+[1mdiff --git a/android/app/src/main/AndroidManifest.xml b/android/app/src/main/AndroidManifest.xml[m
+[1mindex 06ef6ce..4b1853b 100644[m
+[1m--- a/android/app/src/main/AndroidManifest.xml[m
+[1m+++ b/android/app/src/main/AndroidManifest.xml[m
+[36m@@ -13,6 +13,8 @@[m
+         android:name="${applicationName}"[m
+         android:icon="@mipmap/ic_launcher"[m
+         android:usesCleartextTraffic="true">[m
+[32m+[m[32m        <meta-data android:name="com.google.android.geo.API_KEY"[m
+[32m+[m[32m            android:value="AIzaSyBEijp-wp_aSXYvb1lGLQ84xd7yhTME5II"/>[m
+         <activity[m
+             android:name=".MainActivity"[m
+             android:exported="true"[m
+[1mdiff --git a/lib/screens/home/home_screen.dart b/lib/screens/home/home_screen.dart[m
+[1mindex a8d8547..a777a66 100644[m
+[1m--- a/lib/screens/home/home_screen.dart[m
+[1m+++ b/lib/screens/home/home_screen.dart[m
+[36m@@ -1,5 +1,6 @@[m
+ import 'package:flutter/material.dart';[m
+ import 'package:google_fonts/google_fonts.dart';[m
+[32m+[m[32mimport 'package:smart_india_hackathon/screens/home/procession%20tracking/select_pandal_screen.dart';[m
+ import '../festivals/festivals_screen.dart';[m
+ import '../store/store_screen.dart';[m
+ import '../communities/communities_screen.dart';[m
+[36m@@ -57,7 +58,7 @@[m [mclass HomeScreen extends StatelessWidget {[m
+             const SizedBox(height: 16),[m
+             [m
+             // Quick Access Grid[m
+[31m-            _buildQuickAccessGrid(),[m
+[32m+[m[32m            _buildQuickAccessGrid(context),[m
+             const SizedBox(height: 24),[m
+             [m
+             // Festivals Calendar Section[m
+[36m@@ -82,7 +83,7 @@[m [mclass HomeScreen extends StatelessWidget {[m
+     );[m
+   }[m
+ [m
+[31m-  Widget _buildQuickAccessGrid() {[m
+[32m+[m[32m  Widget _buildQuickAccessGrid(BuildContext context) { // Pass context here[m
+     return GridView.count([m
+       shrinkWrap: true,[m
+       physics: const NeverScrollableScrollPhysics(),[m
+[36m@@ -95,72 +96,85 @@[m [mclass HomeScreen extends StatelessWidget {[m
+           'Track Pandals',[m
+           '',[m
+           Icons.location_on,[m
+[32m+[m[32m              () { // This is the navigation logic[m
+[32m+[m[32m            Navigator.push([m
+[32m+[m[32m              context,[m
+[32m+[m[32m              MaterialPageRoute(builder: (context) => const SelectPandalScreen()),[m
+[32m+[m[32m            );[m
+[32m+[m[32m          },[m
+         ),[m
+         _buildQuickAccessCard([m
+           'Visit Store',[m
+           '',[m
+           Icons.store,[m
+[32m+[m[32m              () {}, // Placeholder tap[m
+         ),[m
+         _buildQuickAccessCard([m
+           'Order Prasads',[m
+           '',[m
+           Icons.temple_hindu,[m
+[32m+[m[32m              () {}, // Placeholder tap[m
+         ),[m
+         _buildQuickAccessCard([m
+           'Join Cleanup',[m
+           '',[m
+           Icons.recycling,[m
+[32m+[m[32m              () {}, // Placeholder tap[m
+         ),[m
+       ],[m
+     );[m
+   }[m
+ [m
+[31m-  Widget _buildQuickAccessCard(String title, String subtitle, IconData icon) {[m
+[31m-    return Container([m
+[31m-      decoration: BoxDecoration([m
+[31m-        color: Colors.white,[m
+[31m-        borderRadius: BorderRadius.circular(16),[m
+[31m-        boxShadow: [[m
+[31m-          BoxShadow([m
+[31m-            color: Colors.black.withOpacity(0.05),[m
+[31m-            blurRadius: 10,[m
+[31m-            offset: const Offset(0, 2),[m
+[31m-          ),[m
+[31m-        ],[m
+[31m-      ),[m
+[31m-      child: Padding([m
+[31m-        padding: const EdgeInsets.all(24),[m
+[31m-        child: Column([m
+[31m-          mainAxisAlignment: MainAxisAlignment.center,[m
+[31m-          children: [[m
+[31m-            Container([m
+[31m-              width: 50,[m
+[31m-              height: 50,[m
+[31m-              decoration: const BoxDecoration([m
+[31m-                color: Color(0xFFFF9B00),[m
+[31m-                shape: BoxShape.circle,[m
+[31m-              ),[m
+[31m-              child: Icon([m
+[31m-                icon,[m
+[31m-                color: Colors.white,[m
+[31m-                size: 24,[m
+[31m-              ),[m
+[32m+[m[32m  Widget _buildQuickAccessCard(String title, String subtitle, IconData icon, VoidCallback? onTap) {[m
+[32m+[m[32m    return InkWell( // Wrap with InkWell to make it tappable[m
+[32m+[m[32m      onTap: onTap, // Use the passed-in function for the tap action[m
+[32m+[m[32m      borderRadius: BorderRadius.circular(16), // Match the container's border radius for a clean ripple effect[m
+[32m+[m[32m      child: Container([m
+[32m+[m[32m        decoration: BoxDecoration([m
+[32m+[m[32m          color: Colors.white,[m
+[32m+[m[32m          borderRadius: BorderRadius.circular(16),[m
+[32m+[m[32m          boxShadow: [[m
+[32m+[m[32m            BoxShadow([m
+[32m+[m[32m              color: Colors.black.withOpacity(0.05),[m
+[32m+[m[32m              blurRadius: 10,[m
+[32m+[m[32m              offset: const Offset(0, 2),[m
+             ),[m
+[31m-            const SizedBox(height: 20),[m
+[31m-            Flexible([m
+[31m-              child: Text([m
+[31m-                title,[m
+[31m-                style: GoogleFonts.poppins([m
+[31m-                  fontSize: 14,[m
+[31m-                  fontWeight: FontWeight.bold,[m
+[31m-                  color: const Color(0xFF333333),[m
+[32m+[m[32m          ],[m
+[32m+[m[32m        ),[m
+[32m+[m[32m        child: Padding([m
+[32m+[m[32m          padding: const EdgeInsets.all(24),[m
+[32m+[m[32m          child: Column([m
+[32m+[m[32m            mainAxisAlignment: MainAxisAlignment.center,[m
+[32m+[m[32m            children: [[m
+[32m+[m[32m              Container([m
+[32m+[m[32m                width: 50,[m
+[32m+[m[32m                height: 50,[m
+[32m+[m[32m                decoration: const BoxDecoration([m
+[32m+[m[32m                  color: Color(0xFFFF9B00),[m
+[32m+[m[32m                  shape: BoxShape.circle,[m
+[32m+[m[32m                ),[m
+[32m+[m[32m                child: Icon([m
+[32m+[m[32m                  icon,[m
+[32m+[m[32m                  color: Colors.white,[m
+[32m+[m[32m                  size: 24,[m
+                 ),[m
+[31m-                textAlign: TextAlign.center,[m
+[31m-                maxLines: 2,[m
+[31m-                overflow: TextOverflow.ellipsis,[m
+               ),[m
+[31m-            ),[m
+[31m-          ],[m
+[32m+[m[32m              const SizedBox(height: 20),[m
+[32m+[m[32m              Flexible([m
+[32m+[m[32m                child: Text([m
+[32m+[m[32m                  title,[m
+[32m+[m[32m                  style: GoogleFonts.poppins([m
+[32m+[m[32m                    fontSize: 14,[m
+[32m+[m[32m                    fontWeight: FontWeight.bold,[m
+[32m+[m[32m                    color: const Color(0xFF333333),[m
+[32m+[m[32m                  ),[m
+[32m+[m[32m                  textAlign: TextAlign.center,[m
+[32m+[m[32m                  maxLines: 2,[m
+[32m+[m[32m                  overflow: TextOverflow.ellipsis,[m
+[32m+[m[32m                ),[m
+[32m+[m[32m              ),[m
+[32m+[m[32m            ],[m
+[32m+[m[32m          ),[m
+         ),[m
+       ),[m
+     );[m
+[1mdiff --git a/lib/screens/home/procession tracking/track_pandals.dart b/lib/screens/home/procession tracking/track_pandals.dart[m
+[1mnew file mode 100644[m
+[1mindex 0000000..1240248[m
+[1m--- /dev/null[m
+[1m+++ b/lib/screens/home/procession tracking/track_pandals.dart[m	
+[36m@@ -0,0 +1,437 @@[m
+[32m+[m[32mimport 'dart:async';[m
+[32m+[m[32mimport 'dart:ui' as ui;[m
+[32m+[m[32mimport 'package:flutter/material.dart';[m
+[32m+[m[32mimport 'package:flutter/services.dart';[m
+[32m+[m[32mimport 'package:google_maps_flutter/google_maps_flutter.dart';[m
+[32m+[m[32mimport 'package:geolocator/geolocator.dart';[m
+[32m+[m[32mimport '../../../services/tracking_repository.dart';[m
+[32m+[m[32mimport '../../../services/directions_service.dart';[m
+[32m+[m
+[32m+[m[32mclass MapSample extends StatefulWidget {[m
+[32m+[m[32m  final Pandal pandal;[m
+[32m+[m[32m  final String mode; // 'aagman' | 'visarjan'[m
+[32m+[m
+[32m+[m[32m  const MapSample({super.key, required this.pandal, required this.mode});[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  State<MapSample> createState() => MapSampleState();[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mclass MapSampleState extends State<MapSample> {[m
+[32m+[m[32m  final Completer<GoogleMapController> _controller =[m
+[32m+[m[32m  Completer<GoogleMapController>();[m
+[32m+[m
+[32m+[m[32m  final Set<Marker> _markers = {};[m
+[32m+[m[32m  Timer? _pollTimer;[m
+[32m+[m[32m  Position? _userPosition;[m
+[32m+[m[32m  MurtiLocation? _murtiLocation;[m
+[32m+[m[32m  final _repo = TrackingRepository.instance;[m
+[32m+[m[32m  DateTime? _lastUpdateTime;[m
+[32m+[m[32m  final _directions = DirectionsService('AIzaSyBEijp-wp_aSXYvb1lGLQ84xd7yhTME5II');[m
+[32m+[m[32m  final Set<Polyline> _polylines = {};[m
+[32m+[m[32m  static const String _routePolylineId = 'route';[m
+[32m+[m[32m  static const String _pandalRoutePolylineId = 'pandalRoute';[m
+[32m+[m[32m  bool _showRoute = true;[m
+[32m+[m[32m  bool _routeToDestination = false; // false: Murti->User, true: Murti->Destination[m
+[32m+[m[32m  int? _routeDistanceMeters;[m
+[32m+[m[32m  int? _routeDurationSeconds;[m
+[32m+[m[32m  String? _lastError;[m
+[32m+[m[32m  BitmapDescriptor? _murtiIcon;[m
+[32m+[m
+[32m+[m[32m  CameraPosition get _initialCameraPosition {[m
+[32m+[m[32m    final latLng = _destinationLatLng ?? const LatLng(19.0760, 72.8777); // Mumbai fallback[m
+[32m+[m[32m    return CameraPosition(target: latLng, zoom: 13);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  LatLng? get _destinationLatLng {[m
+[32m+[m[32m    if (widget.mode == 'aagman') {[m
+[32m+[m[32m      if (widget.pandal.aagmanLat != null && widget.pandal.aagmanLng != null) {[m
+[32m+[m[32m        return LatLng(widget.pandal.aagmanLat!, widget.pandal.aagmanLng!);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    } else {[m
+[32m+[m[32m      if (widget.pandal.visarjanLat != null && widget.pandal.visarjanLng != null) {[m
+[32m+[m[32m        return LatLng(widget.pandal.visarjanLat!, widget.pandal.visarjanLng!);[m
+[32m+[m[32m      }[m
+[32m+[m[32m    }[m
+[32m+[m[32m    return null;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  void initState() {[m
+[32m+[m[32m    super.initState();[m
+[32m+[m[32m    _initFlow();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _initFlow() async {[m
+[32m+[m[32m    await _ensureLocationPermission();[m
+[32m+[m[32m    await _loadMurtiMarkerIcon();[m
+[32m+[m[32m    await _loadUserPosition();[m
+[32m+[m[32m    await _loadMurtiLocation();[m
+[32m+[m[32m    _startPolling();[m
+[32m+[m[32m    _updateMarkers();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m
+[32m+[m[32m  Future<void> _loadMurtiMarkerIcon() async {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      final String assetPath = _assetForPandal(widget.pandal.name);[m
+[32m+[m[32m      final icon = await _bitmapFromAssetCircle(assetPath, 72);[m
+[32m+[m[32m      setState(() => _murtiIcon = icon);[m
+[32m+[m[32m    } catch (_) {}[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  String _assetForPandal(String name) {[m
+[32m+[m[32m    final n = name.toLowerCase();[m
+[32m+[m[32m    if (n.contains('lalbaug')) return 'assets/images/lalbaugcha.jpg';[m
+[32m+[m[32m    if (n.contains('gsb')) return 'assets/images/gsb.jpg';[m
+[32m+[m[32m    if (n.contains('chinchpokli') || n.contains('chintamani')) return 'assets/images/chintamani.jpg';[m
+[32m+[m[32m    if (n.contains('mumbaicha')) return 'assets/images/mumbaicha.jpg';[m
+[32m+[m[32m    if (n.contains('fort')) return 'assets/images/fortcha.jpg';[m
+[32m+[m[32m    return 'assets/images/ganpati_placeholder.jpg';[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<BitmapDescriptor> _bitmapFromAssetCircle(String path, int size) async {[m
+[32m+[m[32m    final ByteData data = await rootBundle.load(path);[m
+[32m+[m[32m    final ui.Codec codec = await ui.instantiateImageCodec([m
+[32m+[m[32m      data.buffer.asUint8List(),[m
+[32m+[m[32m      targetWidth: size,[m
+[32m+[m[32m      targetHeight: size,[m
+[32m+[m[32m    );[m
+[32m+[m[32m    final ui.FrameInfo fi = await codec.getNextFrame();[m
+[32m+[m
+[32m+[m[32m    final ui.PictureRecorder recorder = ui.PictureRecorder();[m
+[32m+[m[32m    final Canvas canvas = Canvas(recorder);[m
+[32m+[m[32m    final Paint paint = Paint()..isAntiAlias = true;[m
+[32m+[m[32m    final double radius = size / 2.0;[m
+[32m+[m[32m    final Rect rect = Rect.fromLTWH(0, 0, size.toDouble(), size.toDouble());[m
+[32m+[m
+[32m+[m[32m    // Draw circular clip[m
+[32m+[m[32m    final Path pathCircle = Path()..addOval(Rect.fromCircle(center: Offset(radius, radius), radius: radius));[m
+[32m+[m[32m    canvas.clipPath(pathCircle);[m
+[32m+[m[32m    canvas.drawImageRect([m
+[32m+[m[32m      fi.image,[m
+[32m+[m[32m      Rect.fromLTWH(0, 0, fi.image.width.toDouble(), fi.image.height.toDouble()),[m
+[32m+[m[32m      rect,[m
+[32m+[m[32m      paint,[m
+[32m+[m[32m    );[m
+[32m+[m
+[32m+[m[32m    final ui.Image roundedImage = await recorder.endRecording().toImage(size, size);[m
+[32m+[m[32m    final ByteData? pngBytes = await roundedImage.toByteData(format: ui.ImageByteFormat.png);[m
+[32m+[m[32m    return BitmapDescriptor.fromBytes(pngBytes!.buffer.asUint8List());[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  void dispose() {[m
+[32m+[m[32m    _pollTimer?.cancel();[m
+[32m+[m[32m    super.dispose();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _ensureLocationPermission() async {[m
+[32m+[m[32m    LocationPermission permission = await Geolocator.checkPermission();[m
+[32m+[m[32m    if (permission == LocationPermission.denied) {[m
+[32m+[m[32m      permission = await Geolocator.requestPermission();[m
+[32m+[m[32m    }[m
+[32m+[m[32m    if (permission == LocationPermission.deniedForever) {[m
+[32m+[m[32m      return;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _loadUserPosition() async {[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      final pos = await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.high);[m
+[32m+[m[32m      setState(() => _userPosition = pos);[m
+[32m+[m[32m    } catch (_) {}[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _loadMurtiLocation() async {[m
+[32m+[m[32m    final loc = await _repo.fetchCurrentMurtiLocation([m
+[32m+[m[32m      pandalId: widget.pandal.id,[m
+[32m+[m[32m      mode: widget.mode,[m
+[32m+[m[32m    );[m
+[32m+[m[32m    setState(() {[m
+[32m+[m[32m      _murtiLocation = loc;[m
+[32m+[m[32m      _lastUpdateTime = loc?.updatedAt;[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  void _startPolling() {[m
+[32m+[m[32m    _pollTimer?.cancel();[m
+[32m+[m[32m    _pollTimer = Timer.periodic(const Duration(seconds: 15), (_) async {[m
+[32m+[m[32m      try {[m
+[32m+[m[32m        await _mockStepMurtiTowardsDestination();[m
+[32m+[m[32m        await _loadMurtiLocation();[m
+[32m+[m[32m        _updateMarkers();[m
+[32m+[m[32m        setState(() => _lastError = null);[m
+[32m+[m[32m      } catch (e) {[m
+[32m+[m[32m        setState(() => _lastError = '$e');[m
+[32m+[m[32m      }[m
+[32m+[m[32m    });[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  Future<void> _mockStepMurtiTowardsDestination() async {[m
+[32m+[m[32m    // Move murti a small step towards destination each cycle (demo only)[m
+[32m+[m[32m    final dest = _destinationLatLng;[m
+[32m+[m[32m    if (dest == null) return;[m
+[32m+[m[32m    // If we don't have a current position, seed it near user or dest[m
+[32m+[m[32m    LatLng current = _murtiLocation != null[m
+[32m+[m[32m        ? LatLng(_murtiLocation!.latitude, _murtiLocation!.longitude)[m
+[32m+[m[32m        : (_userPosition != null[m
+[32m+[m[32m            ? LatLng(_userPosition!.latitude, _userPosition!.longitude)[m
+[32m+[m[32m            : dest);[m
+[32m+[m
+[32m+[m[32m    const double stepFraction = 0.05; // 5% towards destination[m
+[32m+[m[32m    final double nextLat = current.latitude + (dest.latitude - current.latitude) * stepFraction;[m
+[32m+[m[32m    final double nextLng = current.longitude + (dest.longitude - current.longitude) * stepFraction;[m
+[32m+[m
+[32m+[m[32m    try {[m
+[32m+[m[32m      await _repo.upsertMockMurtiLocation([m
+[32m+[m[32m        pandalId: widget.pandal.id,[m
+[32m+[m[32m        mode: widget.mode,[m
+[32m+[m[32m        latitude: nextLat,[m
+[32m+[m[32m        longitude: nextLng,[m
+[32m+[m[32m        status: 'ongoing',[m
+[32m+[m[32m      );[m
+[32m+[m[32m      setState(() => _lastError = null);[m
+[32m+[m[32m    } catch (e) {[m
+[32m+[m[32m      setState(() => _lastError = 'Upsert failed: $e');[m
+[32m+[m[32m    }[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  void _updateMarkers() {[m
+[32m+[m[32m    final Set<Marker> newMarkers = {};[m
+[32m+[m[32m    // User marker[m
+[32m+[m[32m    if (_userPosition != null) {[m
+[32m+[m[32m      newMarkers.add([m
+[32m+[m[32m        Marker([m
+[32m+[m[32m          markerId: const MarkerId('user'),[m
+[32m+[m[32m          position: LatLng(_userPosition!.latitude, _userPosition!.longitude),[m
+[32m+[m[32m          infoWindow: const InfoWindow(title: 'You'),[m
+[32m+[m[32m          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      );[m
+[32m+[m[32m    }[m
+[32m+[m[32m    // Murti marker[m
+[32m+[m[32m    if (_murtiLocation != null) {[m
+[32m+[m[32m      newMarkers.add([m
+[32m+[m[32m        Marker([m
+[32m+[m[32m          markerId: const MarkerId('murti'),[m
+[32m+[m[32m          position: LatLng(_murtiLocation!.latitude, _murtiLocation!.longitude),[m
+[32m+[m[32m          infoWindow: InfoWindow(title: 'Murti (${_murtiLocation!.status})'),[m
+[32m+[m[32m          icon: _murtiIcon ?? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueOrange),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      );[m
+[32m+[m[32m    }[m
+[32m+[m[32m    // Destination marker[m
+[32m+[m[32m    final dest = _destinationLatLng;[m
+[32m+[m[32m    if (dest != null) {[m
+[32m+[m[32m      newMarkers.add([m
+[32m+[m[32m        Marker([m
+[32m+[m[32m          markerId: const MarkerId('destination'),[m
+[32m+[m[32m          position: dest,[m
+[32m+[m[32m          infoWindow: InfoWindow(title: widget.mode == 'aagman' ? 'Pandal Destination' : 'Visarjan Destination'),[m
+[32m+[m[32m          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed),[m
+[32m+[m[32m        ),[m
+[32m+[m[32m      );[m
+[32m+[m[32m    }[m
+[32m+[m[32m    setState(() => _markers.clear());[m
+[32m+[m[32m    setState(() => _markers.addAll(newMarkers));[m
+[32m+[m[32m    _updateRoute();[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  @override[m
+[32m+[m[32m  Widget build(BuildContext context) {[m
+[32m+[m[32m    return Scaffold([m
+[32m+[m[32m      appBar: AppBar([m
+[32m+[m[32m        title: Text('${widget.pandal.name} • ${widget.mode[0].toUpperCase()}${widget.mode.substring(1)}'),[m
+[32m+[m[32m      ),[m
+[32m+[m[32m      body: Stack([m
+[32m+[m[32m        children: [[m
+[32m+[m[32m          GoogleMap([m
+[32m+[m[32m            mapType: MapType.normal,[m
+[32m+[m[32m            initialCameraPosition: _initialCameraPosition,[m
+[32m+[m[32m            markers: _markers,[m
+[32m+[m[32m            polylines: _polylines,[m
+[32m+[m[32m            myLocationEnabled: true,[m
+[32m+[m[32m            myLocationButtonEnabled: true,[m
+[32m+[m[32m        
