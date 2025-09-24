@@ -38,6 +38,8 @@ dependencies:
   permission_handler:
   geolocator:
   flutter_osm_plugin:
+  cached_network_image: ^3.4.1
+  url_launcher: ^6.3.2
   
   # Supabase
   supabase_flutter: ^2.3.4
