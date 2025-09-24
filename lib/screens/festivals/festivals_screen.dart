@@ -22,24 +22,32 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
       'location': 'Mumbai',
       'description': 'One of the most famous pandals in Mumbai.',
       'image': 'assets/images/lalbaugcha.jpg',
+      'latitude': 18.991065824298392,
+      'longitude': 72.83740179981581,
     },
     {
       'name': 'Dagdusheth Halwai Ganpati',
       'location': 'Pune',
       'description': 'Famous for its gold-plated idol.',
       'image': 'assets/images/dagdusheth.jpg',
+      'latitude': 18.51639506007601,
+      'longitude': 73.856081703557,
     },
     {
       'name': 'GSB Seva Mandal',
       'location': 'Mumbai',
       'description': 'Known for its eco-friendly celebrations.',
       'image': 'assets/images/gsb.jpg',
+      'latitude': 19.030466375955402,
+      'longitude': 72.858049698938,
     },
     {
       'name': 'Kasba Ganpati',
       'location': 'Pune',
       'description': 'The oldest pandal in Pune.',
       'image': 'assets/images/kasba.jpg',
+      'latitude': 18.51906347934374,
+      'longitude': 73.8572764624569,
     },
   ];
 

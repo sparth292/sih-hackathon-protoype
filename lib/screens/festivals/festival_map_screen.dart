@@ -31,15 +31,20 @@ class _FestivalMapScreenState extends State<FestivalMapScreen> {
   @override
   void initState() {
     super.initState();
-    _destination = widget.destination ??
-        GeoPoint(latitude: 19.0760, longitude: 72.8777); // Mumbai center
-        
-    // Initialize the map with the destination position first
-    _mapController = MapController.withPosition(
-      initPosition: _destination,
-    );
     
-    // Then check for location permission and update position if allowed
+    // Get coordinates from the festival data if available
+    if (widget.festival['latitude'] != null && widget.festival['longitude'] != null) {
+      _destination = GeoPoint(
+        latitude: widget.festival['latitude'] as double,
+        longitude: widget.festival['longitude'] as double,
+      );
+    } else {
+      // Fallback to Mumbai center if no coordinates are provided
+      _destination = widget.destination ?? 
+          GeoPoint(latitude: 19.0760, longitude: 72.8777);
+    }
+    
+    _mapController = MapController.withPosition(initPosition: _destination);
     _checkLocationPermission();
     _initMap();
   }
