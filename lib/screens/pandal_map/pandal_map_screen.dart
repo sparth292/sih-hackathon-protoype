@@ -268,20 +268,6 @@ class _PandalMapScreenState extends State<PandalMapScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
-            child: CircleAvatar(
-              radius: 20,
-              backgroundColor: const Color(0xFFFF9B00),
-              child: const Icon(
-                Icons.person,
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
-          ),
-        ],
       ),
       body: Stack(
         children: [
