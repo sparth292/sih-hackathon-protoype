@@ -4,10 +4,16 @@ import '../festivals/festivals_screen.dart';
 import '../store/store_screen.dart';
 import '../communities/communities_screen.dart';
 import '../../widgets/chat_popup.dart';
+import '../pandal_map/pandal_map_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,9 +108,15 @@ class HomeScreen extends StatelessWidget {
           Icons.store,
         ),
         _buildQuickAccessCard(
-          'Order Prasads',
-          '',
-          Icons.temple_hindu,
+          'Pandal Map',
+          'Explore pandals',
+          Icons.map,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const PandalMapScreen()),
+            );
+          },
         ),
         _buildQuickAccessCard(
           'Join Cleanup',
@@ -115,8 +127,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildQuickAccessCard(String title, String subtitle, IconData icon) {
-    return Container(
+  Widget _buildQuickAccessCard(String title, String subtitle, IconData icon, {VoidCallback? onTap}) {
+    Widget card = Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
@@ -164,6 +176,15 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+
+    if (onTap != null) {
+      return GestureDetector(
+        onTap: onTap,
+        child: card,
+      );
+    }
+    
+    return card;
   }
 
   Widget _buildFestivalsCalendar() {

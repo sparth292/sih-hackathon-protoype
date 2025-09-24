@@ -46,6 +46,7 @@ dependencies:
   # For secure storage of tokens
   flutter_secure_storage: ^9.0.0
   google_generative_ai:  # For Gemini AI integration
+  google_maps_flutter: ^2.5.0  # For displaying maps
 
 dev_dependencies:
   flutter_test:

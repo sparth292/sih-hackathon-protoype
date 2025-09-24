@@ -57,14 +57,6 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
       backgroundColor: const Color(0xFFF8F7F5),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Color(0xFF333333),
-            size: 20,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
         title: Text(
           'Ganpati Pandals',
           style: GoogleFonts.playfairDisplay(
