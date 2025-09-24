@@ -58,7 +58,7 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Ganpati Pandals',
+          'Popular Pandals',
           style: GoogleFonts.playfairDisplay(
             fontSize: 24,
             fontWeight: FontWeight.bold,

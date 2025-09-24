@@ -6,6 +6,7 @@ import '../store/store_screen.dart';
 import '../communities/communities_screen.dart';
 import '../../widgets/chat_popup.dart';
 import '../pandal_map/pandal_map_screen.dart';
+import '../trivia/ganpati_trivia_screen.dart';
 //import 'procession tracking/select_pandal_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -69,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 24),
             
             // Festivals Calendar Section
-            _buildFestivalsCalendar(),
+            _buildGanpatiTrivia(),
           ],
         ),
       ),
@@ -195,62 +196,70 @@ class _HomeScreenState extends State<HomeScreen> {
     return card;
   }
 
-  Widget _buildFestivalsCalendar() {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Festivals Calendar',
-                  style: GoogleFonts.poppins(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF333333),
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Plan your visits with ease',
-                  style: GoogleFonts.poppins(
-                    fontSize: 14,
-                    color: const Color(0xFF666666),
-                  ),
-                ),
-              ],
+  Widget _buildGanpatiTrivia() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const GanpatiTriviaScreen()),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
             ),
-          ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: BoxDecoration(
-              color: const Color(0xFFFF9B00),
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Text(
-              'Explore',
-              style: GoogleFonts.poppins(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Ganpati Trivia',
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF333333),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'Discover interesting facts about Lord Ganesha',
+                    style: GoogleFonts.poppins(
+                      fontSize: 14,
+                      color: const Color(0xFF666666),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-        ],
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              decoration: BoxDecoration(
+                color: const Color(0xFFFF9B00),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: Text(
+                'Explore',
+                style: GoogleFonts.poppins(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

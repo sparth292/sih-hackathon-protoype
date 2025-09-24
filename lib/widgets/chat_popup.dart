@@ -131,7 +131,16 @@ class _ChatPopupState extends State<ChatPopup> {
                         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         hintStyle: TextStyle(color: const Color(0xFF999999)),
                       ),
+                      textInputAction: TextInputAction.send,
+                      keyboardType: TextInputType.text,
+                      textCapitalization: TextCapitalization.sentences,
+                      enableSuggestions: true,
+                      enableInteractiveSelection: true,
                       onSubmitted: (_) => _sendMessage(),
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontFamily: 'Noto Sans', // This font supports multiple scripts
+                      ),
                     ),
                   ),
                   IconButton(
