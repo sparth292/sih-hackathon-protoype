@@ -66,8 +66,8 @@ final List<Product> dummyProducts = [
   ),
   Product(
     id: 'm2',
-    title: 'Clay Durga Idol',
-    description: 'Elegant Durga idol made from natural clay with vegetable dyes',
+    title: 'Clay Ganpati Idol',
+    description: 'Elegant Ganpati idol made from natural clay with vegetable dyes',
     price: 3499.0,
     rating: 4.9,
     imageUrl: 'assets/images/ecoMurti2.jpg',
