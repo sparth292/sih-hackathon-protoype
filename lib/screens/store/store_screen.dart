@@ -176,10 +176,10 @@ class _StoreScreenState extends State<StoreScreen> {
         automaticallyImplyLeading: false,
         title: Text(
           'EcoMurti',
-          style: GoogleFonts.poppins(
-            fontSize: 24,
+          style: GoogleFonts.playfairDisplay(
+            fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF333333),
+            color: const Color(0xFFD2691E),
           ),
         ),
         backgroundColor: Colors.transparent,

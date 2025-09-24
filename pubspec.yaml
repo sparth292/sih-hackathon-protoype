@@ -50,8 +50,7 @@ dependencies:
   google_generative_ai:  # For Gemini AI integration
   google_maps_flutter: ^2.5.0  # For displaying maps
   shared_preferences: ^2.2.2  # For local storage
-  intl: ^0.19.0  # For date formatting
-  cached_network_image: ^3.3.1  # For efficient image loading
+  intl:   # For date formatting
 
 dev_dependencies:
   flutter_test:

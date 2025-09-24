@@ -14,7 +14,7 @@ class FestivalsScreen extends StatefulWidget {
 
 class _FestivalsScreenState extends State<FestivalsScreen> {
   int _selectedCategory = 0;
-  final List<String> categories = ['Nearby', 'Popular', 'Top Rated', 'New'];
+  final List<String> categories = ['Popular', 'Top Rated'];
 
   final List<Map<String, dynamic>> pandals = [
     {
@@ -58,7 +58,7 @@ class _FestivalsScreenState extends State<FestivalsScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Popular Pandals',
+          'Pandals',
           style: GoogleFonts.playfairDisplay(
             fontSize: 24,
             fontWeight: FontWeight.bold,

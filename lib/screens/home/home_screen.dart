@@ -115,6 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
           'Visit Store',
           '',
           Icons.store,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const StoreScreen()),
+            );
+          },           
         ),
         _buildQuickAccessCard(
           'Pandal Map',
@@ -128,9 +134,15 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         _buildQuickAccessCard(
-          'Join Cleanup',
+          'Join Communities',
           '',
-          Icons.recycling,
+          Icons.question_answer,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const CommunitiesScreen()),
+            );
+          },          
         ),
       ],
     );
